@@ -1,0 +1,106 @@
+---
+title: "Analysis"
+author: "Henry Overos"
+date: "3/16/2022"
+output:
+  pdf_document: 
+    keep_tex: yes
+  '': default
+bibliography: amar_research_note.bib
+---
+
+```{r echo = FALSE}
+knitr::opts_chunk$set(echo = FALSE, include = FALSE)
+```
+
+# Testing Modeling of Protest
+
+To demonstrate the validity of the workflow presented in our paper, we conducted a test of model accuracy on one of the AMAR data's most valuable variables, protest. The AMAR protest variable identifies the presence and scale of minority protest for a specific minority-country-year. Our team used the gold standard of human coded news articles collected to estimate the overall accuracy of semi-supervised learning on identifying protest in the news.
+
+## Newsmap
+
+The workhorse model for our method is *Newsmap*, a semi-supervised variation of the *naive Bayes* classifier @watanabe_newsmap_2018. *Newsmap* was originally created to identify the geo-location of news stories but has been shown to be useful in a variety of other contexts, including the classification of UN speeches @watanabe_theory-driven_2020 and news topics @watanabe_conspiracist_.
+
+The model takes a dictionary of "seed words" based on prior knowledge of the subject to inform the classification. In the case of AMAR's protest variable, the model should identify if a text is about protest.
+
+We also separated protest into two categories based on the severity of the protest event. This was done to mirror the original coding schema of AMAR, which identified three types of Protests (for a specific explanation about these types, refer to the Appendix). We separated the types into two, verbal opposition, or mass resistance. Verbal opposition refers to a group or representative of a group making a statement of protest, creating a petition, giving a speech in opposition, or some other sort of action that signifies disagreement and is meant to draw attention to an issue. The second category, mass resistance, refers to actions taken by groups or large numbers of people to visibly or symbolically highlight an issue. Mass resistance can take the form of marches, sit-ins, rallies, strikes, blocking streets, and other, similar forms of action.
+
+To test the effectiveness of the model across specifications, we test both a binary classifier, which identifies protest/not protest, and a tertiary classifier which categorizes articles as verbal/mass protest/not protest.
+
+## Seed Word Selection
+
+Researchers selected initial seed-words related to the topic of protest by examining the AMAR codebook's wording, as well as words found in books, articles and indices on the topic. Further words were added based on frequency in the text. We collected the 300 most frequent terms in the data and manually identified if any could also be included as seed words in the dictionary. We then used a process of assessing the utility of frequency-selected words based on the suggestions on the topic found in @watanabe_theory-driven_2020. The resulting dictionary appears in table 1.
+
+```{r warning=FALSE}
+#source(here::here("code", "binary_analysis.r"))
+```
+
+```{=tex}
+\begin{table}[!htb]
+\centering
+\caption{Protest Dictionary for Multi-Class Protest Classification}
+\begin{tabular}{l|l}
+\hline
+\textbf{Variable} & \textbf{Words} \\ \hline
+Verbal Opposition & aware*, petition*, outcr*, support*, urge*, lobby*, demand*, \\
+ & calling, comment*, voice* \\
+Mass Demonstration & disobedience, property, demonstrat*, unrest, violence
+\end{tabular}
+\end{table}
+```
+```{=tex}
+\begin{table}[!htb]
+\centering
+\caption{Protest Dictionary for Binary Protest Classification}
+\begin{tabular}{l|l}
+\hline
+\textbf{Variable} & \textbf{Words} \\ \hline
+Protest: & aware*, petition*, outcr*, support*, urge*, lobby*, demand*, \\
+ & comment*, voice*, block*, property, small, damage*, cancel*, \\
+ & resign*, violence, death, unrest, street*, organize*
+\end{tabular}
+\end{table}
+```
+## Human-Coded Test Set
+
+Creating the test set was a two step process so that we could compare the accuracy of modeling across whole articles as well as at the sentence level. An entire article may cover multiple topics, protest being one of them. Sentences, however, are much more likely to be related to a single topic and the topics will more likely continue from one sentence to the next. We hypothesized that a change in the unit of analysis from articles to sentences would increase the model's overall classification accuracy. As such, a team of annotators read 200 U.S. news articles from the year 2020 and identified whether each article was related to protest. These researchers also rated the protest by \`type', corresponding to the AMAR codebook's categories (see Appendix).
+
+We then took a sample of 20 articles identified as being about protest by annotators and broke them into sentences. A separate team of annotators then labelled the sentences in each article, identifying the presence of and level of protest. We added extra instructions for the sentence-level annotation, allowing the annotators to categorize hard-to-annotate sentences *in the context of the preceding and following* sentences. This is possible because *Newsmap* allows for smoothing, which, in practice, means that the category of the surrounding texts affects the likelihood that a specific text is also that category. The 20 articles converted into 621 sentences used in annotation, greatly increasing the *N* for analysis in the sample.
+
+## Sentence vs. Article Results Comparison
+
+We present the results of the *Newsmap* models, comparing the scores of both the binary and multi-class models. We also show the difference in model results based on whether we conducted the analysis at the sentence or article level.
+
+Table 3 shows the precision, recall, and F1 values for the binary classification of protest with Newsmap. The results suggest that the model trained on the same articles, but broken up into sentences, is more accurate in predicting the correct outcomes in the human-coded test data.
+
+Table 4 also shows the same metrics but applied to the multi-class model. These results present different outcomes both for sentences and articles but between classes. The sentence-trained model's highest scores go to the *not protest* classification. This is likely because, in the data, there are more sentences *not* about protest than there are about it. In the article-trained model, *not protest* drops to an F1 value of 0.41, although the precision score is higher.
+
+```{=tex}
+\begin{table}[!htb]
+\centering
+\caption{Binary Classification Model Results}
+\begin{tabular}{l|lll|lll}
+\hline
+ & \multicolumn{3}{c|}{Sentences} & \multicolumn{3}{c}{Articles} \\ \cline{2-7}
+ & \multicolumn{1}{l|}{P} & \multicolumn{1}{l|}{R} & F1 & \multicolumn{1}{l|}{P} & \multicolumn{1}{l|}{R} & F1 \\ \cline{2-7} 
+Not Protest/Protest & \multicolumn{1}{l|}{0.76} & \multicolumn{1}{l|}{0.81} & 0.79 & \multicolumn{1}{l|}{.83} & \multicolumn{1}{l|}{0.24} & 0.37 \\ \hline
+\end{tabular}
+\end{table}
+```
+```{=tex}
+\begin{table}[!htb]
+\centering
+\caption{Multi-Class Classification Model Results}
+\begin{tabular}{l|lll|lll}
+\hline
+ & \multicolumn{3}{c|}{Sentences} & \multicolumn{3}{c}{Articles} \\ \cline{2-7} 
+ & \multicolumn{1}{c|}{P} & \multicolumn{1}{c|}{R} & \multicolumn{1}{c|}{F1} & \multicolumn{1}{c|}{P} & \multicolumn{1}{c|}{R} & \multicolumn{1}{c}{F1} \\ \cline{2-7} 
+Not Protest & \multicolumn{1}{l|}{0.76} & \multicolumn{1}{l|}{0.74} & 0.75 & \multicolumn{1}{l|}{0.83} & \multicolumn{1}{l|}{0.33} & 0.41 \\
+Verbal Opp. & \multicolumn{1}{l|}{0.11} & \multicolumn{1}{l|}{0.076} & 0.09 & \multicolumn{1}{l|}{0.065} & \multicolumn{1}{l|}{0.61} & 0.12 \\
+Mass Protest & \multicolumn{1}{l|}{0.18} & \multicolumn{1}{l|}{0.34} & 0.24 & \multicolumn{1}{l|}{0.84} & \multicolumn{1}{l|}{0.55} & 0.66 \\ \hline
+\end{tabular}
+\end{table}
+```
+
+
+## References

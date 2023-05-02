@@ -1,0 +1,92 @@
+Discrimination Index:
+  'dis_1': [under_represent, historic_neglect, improve_status, protect_group]
+  'dis_2': [no_exclusion, no_protection, informal_exclusion]
+  'dis_3': [social_exclusion, no_laws, no_policies, inadequate_policy, widespread_discrimi*]
+  'dis_4': [formal_exclusion, recurring_repression, economic_repress*, restrict_econo*]
+
+Political Discrimination:
+  'poldis_1': [remedial_polic*, reserved_seat*, quota*]
+  'poldis_2': [historical_neglect, underrepresent*]
+  'poldis_3': [social_discrim**, social_exclusion, systemic_discrim*]
+  'poldis_4': [repress*, collective_punish*, collectively_punish*]
+
+
+Economic Discrimination:
+  'econdis_1': [remedial_polic*, reparation*]
+  'econdis_2': [poverty, impoverished, low_income, economic_exclusion]
+  'econdis_3': [systemic_discrim*, economic_discrim*, employment_discrim*]
+  'econdis_4': [banned_from_job*]
+
+
+Cultural Discrimination-Religion:
+  'regcultdis_1': [marginalized-religion*, marginalized_follower*]
+  'regcultdis_2': [religious_restrict*]
+  'regcultdis_3': [ban_on_worship, services_ban*, prohibited_religion]
+
+
+Cultural Discrimination-Language:
+  'langcultdis_1': [linguistic_discrim*, language_discrim*]
+  'langcultdis_2': [marginalized_language*]
+  'langcultdis_3': [prohibited_language*, banned_language*]
+
+
+Grievance:
+  'gr_1': [end_grievance, end_discrimination, equality_policy, remedial_policy]
+  'gr_2': [autonomous_status, create_autonomy, strengthen_autonomy, fiscal_equality]
+  'gr_3': [strengthen_culture, separate_state, separatist*]
+
+
+Kindred/Diaspora Support:
+  'support_kindred': [nonmilitary_support, diaspora_support, group_aid, civic_fund*, cultural_aid, kindred_protest, diaspora_protest, diaspora_negotia*, exile_military, military_supplies, armed_fighters, ethnic_rescue, diapora_combat]
+
+
+Severity of Conflict:
+  'factsev1_1': [brawl*, use_handgun, use_knives, no_weapon_attack]
+  'factsev1_2': [bomb, assassination]
+  'factsev1_3': [riot*]
+  'factsev1_4': [automatic_weapon*, attack_firearm*, use_firearm, heavy_weaponry]
+  'factsev1_5': [communal_warfare, violent_clash]
+
+
+Protest:
+  'prot_1': [aware*, petition*, outcr*, support*, urge*, lobby*, demand*, calling, comment*, voice*]
+  'prot_2': [disobedience, block*, property, small, damage*, cancel*, resign* symbol*]
+  'prot_3': [demonstrat*, violence, death, crowd, unrest, street*, hundred*, thousand*, organize*]
+
+
+Rebellion:
+  'reb_1': [sporadic_terrorism, political_banditry, incident_terrorism]
+  'reb_2': [terrorism_campaign, multiple_terrorist*]
+  'reb_3': [local_rebellion, local_rebels, local_guerrilla, guerrilla*]
+  'reb_4': [rebel_military, armed_rebel, largescale_guerilla, rebel_control, civil_war, rebel_capital, insurgent_capital, insurgent_occupied, guerilla_occupied]
+
+Repression:
+  'rep_1': [domestic_spying, wiretap*, wire_tap, domestic_surveillance]
+  'rep_2': [miliraty_checkpoint*, curfew, emergency_status, containment, military_presernce, widespread_military]
+  'rep_3': [political_arrest*, house_arrest*, exile, political_exile, deportation, deport*, property_confisc*]
+  'rep_4': [forced_resettlement, tortue, violent_coercion]
+  'rep_5': [systematic_kill*, systemic_kill*, ethnic_cleans*, reprisal_kill*, discriminate_kill*, military_kill*, military_campaign]
+
+
+Emigration:
+  'emigration': [exodus, population_decrease, emigrat*, external_migration, brain_drain, mass_emigration]
+  
+
+Displacement:
+  'displacement': [internal_displace*, flee_country, forcibly_displac*, refugee*, internal_refugee*, displace*, flee_home]
+  
+
+Group Organization:
+  'gojpa': [interest_group, advocacy_group, international_advocacy, activist*, group_activist, international_activist*, militia, armed_group, underground_org*, international_activist_group, ethnic_party, ethnic_movement, internationa_movement, umbrella_org*, community_org*, organization_build*, interest_represent*, minority_org*, minority_NGO] 
+  
+
+Autonomy:
+  'autonomy': [secession*, armed_rebellion, administrative_autonomy, self_govern, group_independence, autonomous_region, autonomous_province, reclaim_control, territorial_autonomy]
+
+
+Representation:
+  'representation': [legialative_represent*, executive_represent*, cabinet_represent*, political_participation, minority_inclusion, elected_official, officeholder, representative_government]
+
+
+International Support:
+  'international_support': [humanitarian_aid, igo_support, development_aid, foreign_support, monitor_elections, host_negotiation*, military_support, military_train*, rescue_mission*]

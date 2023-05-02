@@ -1,0 +1,4 @@
+Protest:
+  'prot_1': [aware*, petition*, outcr*, support*, urge*, lobby*, demand*, calling, comment*, voice*]
+  'prot_2': [disobedience, property, cancel*]
+  'prot_3': [demonstrat*, unrest, violence]
