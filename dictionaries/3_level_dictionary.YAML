@@ -1,0 +1,4 @@
+Protest:
+  prot_1: [petition*, support*, demand*, writ*, stand*]
+  prot_2: [march*, police*, violen*,]
+  General_News: [email, tweet, share*, copyright, news, report*]
